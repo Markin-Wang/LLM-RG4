@@ -22,17 +22,26 @@ The weight of LLM-RG4 which only predict finding section (MIMIC-CXR) is in https
 Pyhon = 3.9 and torch = 2.1.0
 
 1. install packages
+   
 pip install -r requirements.txt
 
 2. download pretrained models
+
 download pretrained Vicuna-7b-v1.5, rad-dino, BiomedVLP-CXR-BERT-specialized, bert-base-uncased from hugging face.
-download chexbert in 
+
+download chexbert in https://drive.google.com/file/d/1xkLEMg_9V0WyhqgCdczBOVoLhgvyewSB/view?usp=sharing
 
 3. modify predefine model code:
    
 (1)replace modeling_cxrbert.py downloaded from BiomedVLP-CXR-BERT-specialized with the version we provided in ./hf/BiomedVLP-CXR-BERT-specialized/modeling_cxrbert.py
 
 (2)modify the code in transformers/models/llama/modeling_llama.py, replace loss_fct = CrossEntropyLoss() (in line 1192) with loss_fct = nn.CrossEntropyLoss(reduction='none')
+
+4. prepare evalcap
+
+download evalvap from https://drive.google.com/file/d/1B1_WUotp4IYFiQiIGVPb2ppyGsh4TtIH/view?usp=sharing
+
+unzip the evalcap.zip into ./evalcap
 
 # Train and Test
 ## how to train and test LLM-RG4?
