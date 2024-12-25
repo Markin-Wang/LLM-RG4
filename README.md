@@ -10,7 +10,9 @@ Drafting radiology reports is a complex task requiring flexibility, where radiol
 ![fig1](https://github.com/user-attachments/assets/0baa2c4d-2551-4e4b-8912-5a89dd9cd2ee)
 
 # Dataset and Weight
-MIMIC-RG4 dataset is in https://drive.google.com/file/d/1X8V1H6oxxGfutGsLFofXDzvOnoq7BEyf/view?usp=sharing
+MIMIC-RG4 dataset (text annotation) is in https://drive.google.com/file/d/1X8V1H6oxxGfutGsLFofXDzvOnoq7BEyf/view?usp=sharing
+
+you can download the images from https://physionet.org/content/mimic-cxr-jpg/2.0.0/
 
 The weight of DiscBERT is in https://drive.google.com/file/d/10xYpIvT3UXQ4W7X8IPYEGRNoJ_Ra4n_I/view?usp=sharing
 
@@ -29,7 +31,7 @@ pip install -r requirements.txt
 
 download pretrained Vicuna-7b-v1.5, rad-dino, BiomedVLP-CXR-BERT-specialized, bert-base-uncased from hugging face.
 
-download chexbert in https://drive.google.com/file/d/1xkLEMg_9V0WyhqgCdczBOVoLhgvyewSB/view?usp=sharing
+download chexbert in https://stanfordmedicine.box.com/s/c3stck6w6dol3h36grdc97xoydzxd7w9
 
 3. modify predefine model code:
    
@@ -42,6 +44,8 @@ download chexbert in https://drive.google.com/file/d/1xkLEMg_9V0WyhqgCdczBOVoLhg
 download evalvap from https://drive.google.com/file/d/1B1_WUotp4IYFiQiIGVPb2ppyGsh4TtIH/view?usp=sharing
 
 unzip the evalcap.zip into ./evalcap
+
+(we download it from https://github.com/wang-zhanyu/R2GenGPT, and meteor/data/paraphrase-en.gz downloaded from https://github.com/tylin/coco-caption/blob/master/pycocoevalcap/meteor/data/paraphrase-en.gz)
 
 # Train and Test
 ## how to train and test LLM-RG4?
