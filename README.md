@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 2. download pretrained models
 download pretrained Vicuna-7b-v1.5, rad-dino, BiomedVLP-CXR-BERT-specialized, bert-base-uncased from hugging face.
-download chexbert in
+download chexbert in 
 
 3. modify predefine model code:
    
@@ -53,7 +53,10 @@ cd ./DiscBERT
 
 python train.py (replace the 'predictroad', 'delta_file' and 'BertModel' with yours)
 
-csv format first column is study_id, second column is report, no header, please refer to . /ref.csv
+csv format first column is study_id, second column is report, no header, please refer to . DiscBERT/ref.csv
+
+# acknowledge
+This work leverages codebases from R2GenGPT and CheXbert.
 
 
 
