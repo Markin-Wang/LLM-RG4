@@ -639,38 +639,37 @@ class LLM_RG4(pl.LightningModule):
         return metrics,eval_res
 
     def on_validation_epoch_end(self):
-        if len(self.val_mw_step_outputs) > 5:
-            if self.args.stage_class == 2 and len(self.val_sn_step_outputs) > 5:
-                sn_ce, sn_eval = self.calculate_metric(self.val_sn_step_outputs)
-                sw_ce, sw_eval = self.calculate_metric(self.val_sw_step_outputs)
-                mn_ce, mn_eval = self.calculate_metric(self.val_mn_step_outputs)
-                mw_ce, mw_eval = self.calculate_metric(self.val_mw_step_outputs)
+        if self.args.stage_class == 2 and len(self.val_sn_step_outputs) > 5:
+            sn_ce, sn_eval = self.calculate_metric(self.val_sn_step_outputs)
+            sw_ce, sw_eval = self.calculate_metric(self.val_sw_step_outputs)
+            mn_ce, mn_eval = self.calculate_metric(self.val_mn_step_outputs)
+            mw_ce, mw_eval = self.calculate_metric(self.val_mw_step_outputs)
 
-                ce_list = [sn_ce, sw_ce, mn_ce, mw_ce]
-                ce = {}
-                for key in sn_ce.keys():
-                    total = sum(d[key] for d in ce_list)
-                    ce[key] = total / len(ce_list)
+            ce_list = [sn_ce, sw_ce, mn_ce, mw_ce]
+            ce = {}
+            for key in sn_ce.keys():
+                total = sum(d[key] for d in ce_list)
+                ce[key] = total / len(ce_list)
 
-                nlg_list = [sn_eval, sw_eval, mn_eval, mw_eval]
-                nlg = {}
-                for key in sn_eval.keys():
-                    total = sum(d[key] for d in nlg_list)
-                    nlg[key] = total / len(nlg_list)
+            nlg_list = [sn_eval, sw_eval, mn_eval, mw_eval]
+            nlg = {}
+            for key in sn_eval.keys():
+                total = sum(d[key] for d in nlg_list)
+                nlg[key] = total / len(nlg_list)
 
-                print(ce)
-                print(nlg)
+            print(ce)
+            print(nlg)
 
-                if self.trainer.local_rank == 0:
-                    # if val_score > self.val_score:
-                    self.save_checkpoint(nlg, ce['F1_MICRO'])
-            else:
-                sn_ce, sn_eval = self.calculate_metric(self.val_mw_step_outputs)
-                print(sn_ce)
-                print(sn_eval)
-                if self.trainer.local_rank == 0:
-                    # if val_score > self.val_score:
-                    self.save_checkpoint(sn_eval, sn_ce['F1_MICRO'])
+            if self.trainer.local_rank == 0:
+                # if val_score > self.val_score:
+                self.save_checkpoint(nlg, ce['F1_MICRO'])
+        if self.args.stage_class == 1 and len(self.val_step_outputs) > 100:
+            sn_ce, sn_eval = self.calculate_metric(self.val_step_outputs)
+            print(sn_ce)
+            print(sn_eval)
+            if self.trainer.local_rank == 0:
+                # if val_score > self.val_score:
+                self.save_checkpoint(sn_eval, sn_ce['F1_MICRO'])
         self.val_step_outputs.clear()
         self.val_sn_step_outputs.clear()
         self.val_sw_step_outputs.clear()
