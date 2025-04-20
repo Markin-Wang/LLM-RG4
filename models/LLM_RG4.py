@@ -663,7 +663,7 @@ class LLM_RG4(pl.LightningModule):
             if self.trainer.local_rank == 0:
                 # if val_score > self.val_score:
                 self.save_checkpoint(nlg, ce['F1_MICRO'])
-        if self.args.stage_class == 1 and len(self.val_step_outputs) > 100:
+        if self.args.stage_class == 1 and len(self.val_step_outputs) > 5:
             sn_ce, sn_eval = self.calculate_metric(self.val_step_outputs)
             print(sn_ce)
             print(sn_eval)
