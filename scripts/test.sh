@@ -12,7 +12,7 @@ chexbert_path="./hf/chexbert.pth"
 bert_path="./hf/bert-base-uncased"
 version="train_stage2"
 stage1_ckpt_path="./save/mimic_cxr/vicuna_sentencelevel_1_75_128token_e-4_direct_stage1_fix/pths/checkpoint_epoch1_step14384_bleu0.165496_cider0.280208_chexbert0.381323.pth"
-srage2_ckpt_path="./save/mimic_cxr/final_iit_withloss_A100/pths/checkpoint_epoch1_step43152_bleu0.249316_cider0.745028_chexbert0.571643.pth"
+stage2_ckpt_path="./save/mimic_cxr/final_iit_withloss_A100/pths/checkpoint_epoch1_step43152_bleu0.249316_cider0.745028_chexbert0.571643.pth"
 test_mode="sn"
 savepath="./save/$dataset/$version/$test_mode"
 if [ ! -d "$savepath" ]; then
@@ -61,5 +61,5 @@ python -u train.py \
     --visual_token_number 128 \
     --test_mode ${test_mode} \
     --test_batch_size 8 \
-    --delta_file ${srage2_ckpt_path} \
+    --delta_file ${stage2_ckpt_path} \
     2>&1 | tee -a ${savepath}/log.txt
