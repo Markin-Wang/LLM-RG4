@@ -1,0 +1,13 @@
+__pycache__/
+./hf
+hf/
+./save
+save/
+./scripts
+scripts/
+./data
+data/
+./MIMIC-RG4
+MIMIC-RG4/
+./pretrained_models
+pretrained_models/
